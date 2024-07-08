@@ -1,5 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { SongsService } from './songs.service';
+import { CreateSongDTO } from './dto/create.dto';
 
 @Controller('songs')
 export class SongsController {
@@ -11,7 +20,22 @@ export class SongsController {
   }
 
   @Get(':id')
-  findOne() {
-    return this.songsService.findOne('1');
+  findOne(@Param('id') id: string) {
+    return this.songsService.findOne(id);
+  }
+
+  @Post()
+  create(@Body() createSongDTO: CreateSongDTO) {
+    return this.songsService.create(createSongDTO);
+  }
+
+  @Put('id')
+  update() {
+    return this.songsService.update();
+  }
+
+  @Delete('id')
+  delete() {
+    return this.songsService.delete();
   }
 }
