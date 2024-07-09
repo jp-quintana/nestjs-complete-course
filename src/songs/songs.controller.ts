@@ -38,21 +38,59 @@ export class SongsController {
     )
     id: number,
   ) {
-    return this.songsService.findOne(id);
+    try {
+      return this.songsService.findOne(id);
+    } catch (error: any) {
+      throw new HttpException(
+        'server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        { cause: error },
+      );
+    }
   }
 
   @Post()
   create(@Body() createSongDTO: CreateSongDTO) {
-    return this.songsService.create(createSongDTO);
+    try {
+      return this.songsService.create(createSongDTO);
+    } catch (error: any) {
+      throw new HttpException(
+        'server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        { cause: error },
+      );
+    }
   }
 
-  @Put('id')
+  @Put(':id')
   update() {
-    return this.songsService.update();
+    try {
+      return this.songsService.update();
+    } catch (error: any) {
+      throw new HttpException(
+        'server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        { cause: error },
+      );
+    }
   }
 
-  @Delete('id')
-  delete() {
-    return this.songsService.delete();
+  @Delete(':id')
+  delete(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
+    try {
+      return this.songsService.delete(id);
+    } catch (error: any) {
+      throw new HttpException(
+        'server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        { cause: error },
+      );
+    }
   }
 }

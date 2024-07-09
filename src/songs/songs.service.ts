@@ -11,14 +11,12 @@ export class SongsService {
     private songsRepository: Repository<Songs>,
   ) {}
 
-  findAll() {
-    // throw new Error('hola');
-    // return this.songs;
+  async findAll() {
+    return await this.songsRepository.find();
   }
 
-  findOne(id: number) {
-    return `Find one song based on id ${typeof id}`;
-    // return this.songs.find((song) => song.id === id);
+  async findOne(id: number) {
+    return await this.songsRepository.findOneBy({ id });
   }
 
   async create(songDTO: CreateSongDTO) {
@@ -30,7 +28,7 @@ export class SongsService {
     return 'Update existing song based on id';
   }
 
-  delete() {
-    return 'Delete existing song based on id';
+  async delete(id: number) {
+    return await this.songsRepository.delete(id);
   }
 }
