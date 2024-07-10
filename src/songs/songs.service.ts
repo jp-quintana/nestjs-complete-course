@@ -24,18 +24,18 @@ export class SongsService {
     return await this.songsRepository.findOneBy({ id });
   }
 
-  async create(createSongDTO: CreateSongDTO) {
+  async create(songDTO: CreateSongDTO) {
     const song = new Songs();
 
     const artists = await this.artistsRepository.findBy({
-      id: In(createSongDTO.artists),
+      id: In(songDTO.artists),
     });
 
-    song.title = createSongDTO.title;
+    song.title = songDTO.title;
     song.artists = artists;
-    song.releasedDate = createSongDTO.releasedDate;
-    song.duration = createSongDTO.duration;
-    song.lyrics = createSongDTO.lyrics;
+    song.releasedDate = songDTO.releasedDate;
+    song.duration = songDTO.duration;
+    song.lyrics = songDTO.lyrics;
 
     return await this.songsRepository.save(song);
   }
@@ -48,7 +48,7 @@ export class SongsService {
       lyrics: songToUpdate.lyrics,
     };
 
-    if (updateData?.artists.length > 0) {
+    if (songToUpdate?.artists?.length > 0) {
       const artists = await this.artistsRepository.findBy({
         id: In(songToUpdate.artists),
       });

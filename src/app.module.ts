@@ -10,6 +10,8 @@ import { DataSource } from 'typeorm';
 import { Songs } from './songs/songs.entity';
 import { Users } from './users/users.entity';
 import { Artists } from './artists/artists.entity';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { Artists } from './artists/artists.entity';
       synchronize: true,
     }),
     SongsModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
