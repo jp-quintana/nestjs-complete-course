@@ -8,6 +8,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { DataSource } from 'typeorm';
 import { Songs } from './songs/songs.entity';
+import { Users } from './users/users.entity';
+import { Artists } from './artists/artists.entity';
 
 @Module({
   imports: [
@@ -22,7 +24,7 @@ import { Songs } from './songs/songs.entity';
       port: parseInt(process.env.DATABASE_PORT),
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
-      entities: [Songs],
+      entities: [Songs, Artists, Users],
       synchronize: true,
     }),
     SongsModule,
