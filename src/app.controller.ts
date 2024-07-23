@@ -11,7 +11,7 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('profile')
+  @Get('private')
   @UseGuards(JwtAuthGuard)
   getProfile(@Req() request): string {
     return request.user;
