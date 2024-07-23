@@ -21,9 +21,7 @@ export class UsersService {
   }
 
   async findOne(data: LoginDTO) {
-    console.log({ data });
     const user = await this.usersRepository.findOneBy({ email: data.email });
-    console.log({ user });
 
     if (!user) throw new UnauthorizedException('User not found');
 

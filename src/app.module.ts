@@ -37,9 +37,7 @@ import { UsersModule } from './users/users.module';
   providers: [AppService],
 })
 export class AppModule implements NestModule {
-  constructor(private dataSource: DataSource) {
-    console.log('dbName', this.dataSource.driver.database);
-  }
+  constructor(private dataSource: DataSource) {}
   configure(consumer: MiddlewareConsumer) {
     // consumer.apply(LoggerMiddleware).forRoutes('songs'); // option 1
     // consumer
